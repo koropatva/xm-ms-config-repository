@@ -1,2 +1,2 @@
 # xm-ms-config-repository
-Demo XM^online repository for the xm-ms-config
+Demo Configuration Repository for the xm-ms-config
