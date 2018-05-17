@@ -1,0 +1,12 @@
+---
+logoUrl: 'https://www.drei.at/portal/media/img/dreilogo2k.png'
+name: XM^online
+theme: teal
+socialConfiguration:
+    linkedinEnabled: true
+    facebookEnabled: true
+    googleEnabled: true
+    twitterEnabled: true   
+langs:
+    - en
+    - ru

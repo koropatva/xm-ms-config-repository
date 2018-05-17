@@ -1,0 +1,1014 @@
+---
+types:
+    - key: SIMPLE
+      name: { en: "Simple information" }
+      isApp: true
+      isAbstract: true
+      icon: content_paste
+      tags:
+          - key: TEST
+            name: { en: "Test Account" }
+          - key: FAVORIT
+            name: { en: "Favorite" }
+      dataSpec: |
+                {
+                        "type": "object",
+                        "properties": {
+                          "first_name": { "type": "string" },
+                          "last_name": { "type": "string" },
+                          "address": {
+                            "type": "object",
+                            "properties": {
+                              "street_1": { "type": "string" },
+                              "street_2": { "type": "string" },
+                              "city": { "type": "string" },
+                              "state": { "type": "string" },
+                              "zip_code": { "type": "string" }
+                            }
+                          },
+                          "phone_numbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "number": { "type": "string" },
+                                "type": {
+                                  "type": "string",
+                                  "enum": ["cell", "home", "work"]
+                                }
+                              },
+                              "required": [ "number", "type" ]
+                            }
+                          }
+                        }
+                }
+      dataForm: |
+                [
+                    {  "type": "flex",
+                        "flex-flow": "row wrap",
+                        "fxLayoutGap": "12px",
+                        "items": [ "first_name", "last_name" ]
+                    },
+                    { "key": "address.street_1", "title": "Address"},
+                    { "key": "address.street_2", "title": "Street" },
+                    { "type": "div",
+                      "display": "flex",
+                      "flex-direction": "row",
+                      "fxLayoutGap": "12px",
+                      "items": [
+                        { "key": "address.city", "flex": "3 3 150px",
+                          "notitle": true, "placeholder": "City" },
+                        { "key": "address.state", "flex": "1 1 50px",
+                          "notitle": true, "placeholder": "State" },
+                        { "key": "address.zip_code", "flex": "2 2 100px",
+                          "notitle": true, "placeholder": "Zip Code" }
+                      ]
+                    },
+                    { "key": "phone_numbers",
+                      "type": "array",
+                      "items": [ {
+                        "type": "div",
+                        "displayFlex": true,
+                        "flex-direction": "row",
+                        "fxLayoutGap": "12px",
+                        "items": [
+                          { "key": "phone_numbers[].type", "flex": "1 1 50px", "notitle": true, "required": true },
+                          { "key": "phone_numbers[].number", "flex": "4 4 200px", "notitle": true }
+                        ]
+                      } ]
+                    }  
+                ]
+    - key: SIMPLE.MAIN-INFO
+      name: { en: "Main info" }
+      isApp: false
+      isAbstract: false
+    - key: SIMPLE.SOCIAL-LINKS
+      name: { en: "Social networks" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties":{
+                            "socialNetworks":{
+                                "type": "array",
+                                "maxItems":10,
+                                "items": {
+                                    "type": "object",
+                                    "properties":{
+                                        "socialNetworkChoose":{
+                                            "type":"string", "enum":["Telegram","VK","Facebook","Twitter","Instagram","LinkedIn","BitcoinTalk","Medium","Reddit","GitHub","WEB","Other"]
+                                        },
+                                        "socialNetworkLink":{
+                                            "type":"string", "title":"Link"
+                                        }
+                                    }
+                                }    
+                            }
+                        }
+                    }
+      dataForm: |
+                    [
+                        {
+                            "key":"socialNetworks",
+                            "type":"array",
+                            "title": {"en":"Social networks","ru":"Социальные сети"},
+                            "items":[{
+                            "type": "div",
+                            "displayFlex": true,
+                            "flex-direction": "row",
+                            "fxLayoutGap": "12px",
+                            "items": [
+                                        { "key": "socialNetworks[].socialNetworkChoose", "flex": "1 1 50px", "notitle": true},
+                                        { "key": "socialNetworks[].socialNetworkLink", "flex": "4 4 200px","title": {"en":"Social link","ru":"Ссылка социальной сети"}}
+                            ]
+                            }]
+                        }
+                    ]
+    - key: SIMPLE.RANGE-TYPE
+      name: { en: "Range type" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties":{
+                                "range": {
+                                  "type": "integer",
+                                  "title": "Is JSON Form useful?",
+                                  "description": "The field should appear as a range that accepts values between 0 (excluded) and 200 by steps of 20 on browsers that support the \"range\" input type.<br/>Note that the \"step\" constraint is not enforced when the form is submitted.",
+                                  "default": 40,
+                                  "minimum": 0,
+                                  "exclusiveMinimum": true,
+                                  "maximum": 200
+                                }
+                        }
+                    }
+      dataForm: |
+                    [
+                        {
+                          "key": "range",
+                          "type": "range",
+                          "step": 20
+                        }
+                    ]
+    - key: SIMPLE.COLOR-PICKER
+      name: { en: "Color picker" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties": {
+                            "maincolor": {
+                              "type": "string",
+                              "title": "Main color",
+                              "format": "color"
+                            }
+                        }
+                    }
+      dataForm: |
+                [
+                    "maincolor"
+                ]
+    - key: SIMPLE.SELECT-TYPE
+      name: { en: "Select type" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties": {
+                            "gender": {
+                              "type": "string",
+                              "title": "Gender",
+                              "enum": [ "male", "female", "alien" ]
+                            },
+                            "gender2": {
+                              "type": "string",
+                              "title": "Gender",
+                              "enum": [ "male", "female", "alien" ]
+                            },
+                            "ismale": {
+                              "type": "boolean",
+                              "title": "Is male?"
+                            },
+                            "isfemale": {
+                              "type": "boolean",
+                              "title": "Is female?"
+                            }
+                        }
+                    }
+      dataForm: |
+                [
+                    {
+                        "key": "gender",
+                        "titleMap": {
+                          "male": "Dude",
+                          "female": "Dudette",
+                          "alien": "I'm from outer space!"
+                        }
+                    }, 
+                    {
+                        "key": "gender2",
+                        "title": "Gender re-ordered",
+                        "options": {
+                          "": "Please select",
+                          "alien": "I'm from outer space!",
+                          "male": "Dude",
+                          "female": "Dudette"
+                        }
+                    }, 
+                    {
+                        "key": "ismale",
+                        "type": "select"
+                    }, 
+                    {
+                        "key": "isfemale",
+                        "type": "select",
+                        "titleMap": {
+                          "false": "No",
+                          "true": "Yes"
+                        }
+                    }, 
+                    {
+                      "title": "Submit",
+                      "type": "submit"
+                    }
+                ]
+    - key: SIMPLE.BOOLEAN-TYPE
+      name: { en: "Boolean type" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties": {
+                            "language": {
+                              "type": "boolean"
+                            },
+                            "fantastic": {
+                              "type": "boolean",
+                              "title": "Is it fantastic?"
+                            },
+                            "cool": {
+                              "type": "boolean",
+                              "title": "Is it cool?"
+                            },
+                            "cool2": {
+                              "type": "boolean",
+                              "title": "Is it cool again?"
+                            }
+                        }
+                    }
+      dataForm: |
+                [
+                    {
+                        "key": "language",
+                        "type": "boolean"
+                    }, 
+                    {
+                        "key": "fantastic",
+                        "type": "boolean"
+                    }, 
+                    {
+                        "key": "cool",
+                        "type": "boolean"
+                    }, 
+                    {
+                        "key": "cool2",
+                        "type": "boolean"
+                    }, 
+                    {
+                        "title": "Submit",
+                        "type": "submit"
+                    }
+                ]
+    - key: SIMPLE.PASSWORD
+      name: { en: "Password type" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                    {
+                        "type":"object",
+                        "properties": {
+                            "pwd": {
+                              "type": "string"
+                            }
+                        }
+                    }
+      dataForm: |
+                [
+                    {
+                        "key": "pwd",
+                        "type": "password"
+                    }, 
+                    {
+                        "title": "Submit",
+                        "type": "submit"
+                    }
+                ]
+    - key: ARRAYS
+      name: { en: "Arrays" }
+      isApp: true
+      isAbstract: true
+      icon: queue
+    - key: ARRAYS.SIMPLE
+      name: { en: "Simple array" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                {
+                        "type": "object",
+                        "title": "Items",
+                        "properties": {
+                            "lol": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "title": "Item",
+                                  "properties":{
+                                      "item":{
+                                          "type":"string"
+                                      }
+                                  }
+                                }
+                            }
+                        }
+                }
+      dataForm: |
+                [
+                        {
+                            "key":"lol",
+                            "title":"Items",
+                            "type":"array",
+                            "items":{
+                                "key":"lol[].item"
+                            }
+                        },
+                        {
+                          "type": "submit",
+                          "style": "btn-info",
+                          "title": "OK"
+                        }
+                ]
+    - key: ARRAYS.ARR1
+      name: { en: "Array with info" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                {
+                        "type": "object",
+                        "title": "Info",
+                        "properties": {
+                            "array1":{
+                                "type":"array",
+                                "maxItems":10,
+                                "items":{
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "count":{
+                                            "type":"string",
+                                            "enum":["1","2","3"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                }
+      dataForm: |
+                [
+                        {
+                            "type": "help",
+                            "helpvalue": "<h4>Array Example</h4><p>Try adding a couple of forms</p>"    
+                        },
+                        {
+                            "key":"array1",
+                            "type":"array",
+                            "title":"Array example",
+                            "items":[
+                                   {"key":"array1[].name"},
+                                   {"key":"array1[].email"},
+                                   {"key":"array1[].count"}
+                            ]
+                        },
+                        {
+                          "type": "submit",
+                          "style": "btn-info",
+                          "title": "OK"
+                        }
+                ]
+    - key: ARRAYS.DOUBLE-ARRAY
+      name: { en: "Double array" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                {
+                        "type": "object",
+                        "title": "Info",
+                        "properties": {
+                          "friends": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "title": "Friend",
+                              "properties": {
+                                "nick": {
+                                  "type": "string",
+                                  "title": "Nickname"
+                                },
+                                "animals": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "title": "Animal name"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                }
+      dataForm: |
+                [
+                        {
+                            "type": "help",
+                            "helpvalue": "<h4>Array Example</h4><p>Try adding a couple of forms</p>"    
+                        },
+                        {
+                                  "type": "array",
+                                  "key": "friends",
+                                  "title": "Friends ",
+                                  "readOnly": true,
+                                  "items": {
+                                    "type": "section",
+                                    "items": [
+                                      {
+                                        "type": "array",
+                                        "key": "friends[].animals",
+                                        "items": [
+                                          "friends[].animals[]"
+                                        ]
+                                      },
+                                      "friends[].nick"
+                                    ]
+                                  }
+                        },
+                        {
+                          "type": "submit",
+                          "style": "btn-info",
+                          "title": "OK"
+                        }
+                ]
+    - key: ARRAYS.TABS
+      name: { en: "Tabarray" }
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                {
+                    "type":"object",
+                    "properties":{
+                       "friends": {
+                       "type": "array",
+                       "items": {
+                         "type": "object",
+                         "title": "Friend",
+                         "properties": {
+                           "nick": {
+                             "type": "string",
+                             "title": "Nickname"
+                           },
+                           "animals": {
+                             "type": "array",
+                             "items": {
+                               "name":{
+                               "type": "string",
+                               "title": "Animal name"
+                               },
+                               "age":{
+                                   "type":"number"
+                               }
+                             }
+                           }
+                         }
+                       }
+                     }
+                    }
+                }
+      dataForm: |
+                [
+                 {
+                    "type": "tabarray",
+                    "items": {
+                      "type": "section",
+                      "items": [
+                        "friends[].nick",
+                        {
+                          "type": "array",
+                          "items": [
+                            "friends[].animals[].name",
+                            "friends[].animals[].age"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                {
+                    "type": "submit",
+                    "style": "btn-info",
+                    "title": "OK"
+                }
+                ]
+    - key: BUTTON
+      name: { en: "Button" }
+      isApp: true
+      isAbstract: true
+      icon: hd
+      dataSpec: |
+                {
+                    "type":"object",
+                    "properties":{
+                            "language": {
+                              "type": "string",
+                              "title": "Best language",
+                              "enum": [ "JavaScript", "Python", "PHP", "Java", "C++", "other" ]
+                            },
+                            "favourite": {
+                              "type": "boolean",
+                              "title": "Is it your favourite?"
+                            }
+                    }
+                }
+      dataForm: |
+                [
+                    {
+                        "key": "language",
+                        "type": "radiobuttons",
+                        "activeClass": "btn-success"
+                    }, 
+                    {
+                        "key": "favourite",
+                        "type": "radiobuttons",
+                        "activeClass": "btn-danger",
+                        "titleMap": {
+                          "true": "Yes",
+                          "false": "No"
+                        }
+                    }, 
+                    {
+                        "title": "Submit",
+                        "type": "submit"
+                    }
+                ]
+    - key: BUTTON.BUT
+      name: { en: "Button" }
+      isApp: false
+      isAbstract: false
+    - key: CHECKBOX
+      name: { en: "Checkbox"}
+      isApp: true
+      isAbstract: true
+      icon: done
+      dataSpec: |
+                {
+                    "type":"object",
+                       "properties": {
+                          "flag": {
+                            "type": "boolean",
+                            "title": "Adult"
+                          },
+                          "adultOnlyInfo": {
+                            "type": "object",
+                            "properties": {
+                              "field1": {
+                                "title": "Field 1",
+                                "type": "string"
+                              },
+                              "field2": {
+                                "title": "Field 2",
+                                "type": "integer"
+                              }
+                            },
+                            "required": ["field1", "field2"]
+                          },
+                          "commonInfo": {
+                            "title": "Common Field",
+                            "type": "string"
+                          }
+                        },
+                        "dependencies": {
+                          "flag": ["adultOnlyInfo"]
+                        }
+                }
+      dataForm: |
+                [
+                    {
+                        "key":"flag,
+                        "type":"boolean",
+                        "inlinetitle": "Check this box if you are over 18",
+                        "toggleNext": 1
+                        
+                    }
+                ]
+    - key: CHECKBOX.CHECK
+      name: { en: "Checkbox buttons"}
+      isApp: false
+      isAbstract: false
+      dataSpec: |
+                {
+                    "type":"object",
+                        "properties": {
+                            "language": {
+                                "type": "array",
+                                "title": "Best language",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [ "JavaScript", "Python", "PHP", "Java", "C++", "other" ]
+                                }
+                            }
+                        }
+                }
+      dataForm: |
+                [
+                    {
+                      "key": "language",
+                      "type": "checkboxbuttons",
+                      "activeClass": "btn-success"
+                    },
+                    {
+                      "title": "Submit",
+                      "type": "submit"
+                    }
+                ]
+    - key: FIELDSET
+      name: { en: "Fieldset" }
+      isApp: true
+      isAbstract: true
+      icon: assignment_ind
+      dataSpec: |
+                {
+                    "type": "object",
+                    "properties": {
+                           "text": {
+                              "type": "string",
+                              "title": "Text"
+                            },
+                            "category": {
+                              "type": "string",
+                              "title": "Category",
+                              "enum": [
+                                "Geography",
+                                "Entertainment",
+                                "History",
+                                "Arts",
+                                "Science",
+                                "Sports"
+                              ]
+                            }
+                      }
+                }
+      dataForm: |
+                [
+                   {
+                      "type": "selectfieldset",
+                      "title": "Make a choice",
+                      "items": [
+                        {
+                          "key": "text",
+                          "legend": "Search by text"
+                        },
+                        {
+                          "key": "category",
+                          "legend": "Search by category"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "submit",
+                      "title": "Submit"
+                    }
+                ]    
+    - key: FIELDSET.FIELD
+      name: { en: "Fieldset" }
+      isApp: false
+      isAbstract: false
+    - key: LOL
+      name: {en: "Account"}
+      isApp: true
+      isAbstract: true
+      icon: account_circle
+      functions: 
+          - key: LOL.ACTIVATE
+            name: { en: "Activate account", ru: "Погасить Ваучер" }
+            actionName: { en: "Activate account"}
+            allowedStateKeys: 
+                - NEW
+            inputSpec: |
+                      {
+                          "type": "object",
+                          "properties": {
+                                "activationCode": {
+                                    "title": "Activation code",
+                                    "type": "string"
+                                },
+                                "nick": {
+                                    "title": "Enter your nickname",
+                                    "type": "string"
+                                }
+                            }
+                      }
+          - key: LOL.MONEY
+            name: { en: "Money", ru: "Погасить Ваучер" }
+            actionName: { en: "Money"}
+            isShowFormWithoutData: false
+            allowedStateKeys: 
+                - VERIFIED
+                - ACTIVE
+            inputSpec: |
+                       {
+                          "type": "object",
+                          "properties": {
+                                "numberOfMoney": {
+                                    "title": "Number of monney",
+                                    "type": "number"
+                                },
+                                "wallet": {
+                                    "title": "Wallet ID",
+                                    "type": "string"
+                                }
+                            }
+                       }
+          - key: HELLO
+            name: { en: "Hello", ru: "Погасить Ваучер" }
+            actionName: { en: "Hello"}
+            inputSpec: |
+                       {
+                          "type": "object",
+                          "properties": {
+                                "hello": {
+                                    "title": "String",
+                                    "type": "string",
+                                    "readOnly":true,
+                                    "default":"Hello"
+                                }
+                            }
+                       }
+      states: 
+          - key: NEW
+            name: { en: "New", ru: "Новый" }
+            icon: fiber_new
+            color: '#FFEB3B'
+            next:
+                - stateKey: VERIFIED
+                  name: { en: "Verify", ru: "Проверить" }
+                - stateKey: REJECTED
+                  name: { en: "Reject", ru: "Отклонить" }
+          - key: VERIFIED
+            name: { en: "Verified", ru: "Проверенный" }
+            icon: verified_user
+            color: '#CDDC39'
+            next:
+                - stateKey: ACTIVE
+                  name: { en: "Activate", ru: "Активировать" }
+          - key: ACTIVE
+            name: { en: "Active", ru: "Активный" }
+            icon: play_arrow
+            color: '#4CAF50'
+            next:
+                - stateKey: BLOCKED
+                  name: { en: "Block", ru: "Блокировать" }
+                - stateKey: RETIRED
+                  name: { en: "Retire", ru: "Удалить" }
+          - key: REJECTED
+            name: { en: "Rejected", ru: "Отклоненный" }
+            icon: close
+            color: '#FF5722'
+          - key: RETIRED
+            name: { en: "Retired", ru: "Удаленный" }
+            icon: stop
+            color: '#000000'
+          - key: BLOCKED
+            name: { en: "Blocked", ru: "Блокированный" }
+            icon: pause
+            color: '#795548'
+            next:
+                - stateKey: ACTIVE
+                  name: { en: "Activate", ru: "Активировать" }
+      dataSpec: | 
+                {
+                        "type": "object",
+                        "properties": {
+                          "first_name": { "type": "string" },
+                          "last_name": { "type": "string" },
+                          "address": {
+                            "type": "object",
+                            "properties": {
+                              "street_1": { "type": "string" },
+                              "street_2": { "type": "string" },
+                              "city": { "type": "string" },
+                              "state": { "type": "string" },
+                              "zip_code": { "type": "string" }
+                            }
+                          },
+                          "phone_numbers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "number": { "type": "string" },
+                                "type": {
+                                  "type": "string",
+                                  "enum": ["cell", "home", "work"]
+                                }
+                              },
+                              "required": [ "number", "type" ]
+                            }
+                          }
+                        } 
+                }
+      dataForm: |
+                [
+                    {  "type": "flex",
+                        "flex-flow": "row wrap",
+                        "fxLayoutGap": "12px",
+                        "items": [ "first_name", "last_name" ]
+                    },
+                    { "key": "address.street_1", "title": "Address"},
+                    { "key": "address.street_2", "title": "Street" },
+                    { "type": "div",
+                      "display": "flex",
+                      "flex-direction": "row",
+                      "fxLayoutGap": "12px",
+                      "items": [
+                        { "key": "address.city", "flex": "3 3 150px",
+                          "notitle": true, "placeholder": "City" },
+                        { "key": "address.state", "flex": "1 1 50px",
+                          "notitle": true, "placeholder": "State" },
+                        { "key": "address.zip_code", "flex": "2 2 100px",
+                          "notitle": true, "placeholder": "Zip Code" }
+                      ]
+                    },
+                    { "key": "phone_numbers",
+                      "type": "array",
+                      "items": [ {
+                        "type": "div",
+                        "displayFlex": true,
+                        "flex-direction": "row",
+                        "fxLayoutGap": "12px",
+                        "items": [
+                          { "key": "phone_numbers[].type", "flex": "1 1 50px", "notitle": true, "required": true },
+                          { "key": "phone_numbers[].number", "flex": "4 4 200px", "notitle": true }
+                        ]
+                      } ]
+                    }   
+                ]
+    - key: LOL.USER
+      name: {en: "Account"}
+      isApp: false
+      isAbstract: false
+      icon: account_circle
+    - key: CAR
+      name: { en: "Car", ru: "Автомобиль" }
+      isApp: true
+      isAbstract: true
+      fastSearch:
+          - query: typeKey:CAR* AND data.registrationNumber:AA*
+            name: { en: "Registered in Kyiv", ru: "Зарегистрированные в Киеве" }
+      icon: directions_car
+      comments:
+          - key: DEFAULT
+            name: { en: "Comments", ru: "Комментарии" }
+      ratings:
+          - key: RATING1
+            name: { en: "Thumb rating", ru: "Большой палец" }
+            style: THUMB
+            votes: 1
+      dataSpec: |
+                {
+                    "type": "object",
+                    "properties": {
+                        "vin": {
+                            "title": "VIN",
+                            "type": "string"
+                        },
+                        "registrationNumber": {
+                            "title": "Registration Number",
+                            "type": "string"
+                        },
+                        "isMoving": {
+                            "title": "Is Moving",
+                            "type": "boolean"
+                        },
+                        "isDoorClosed": {
+                            "title": "Is Door Closed",
+                            "type": "boolean"
+                        },
+                        "isCharging": {
+                            "title": "Is Charging",
+                            "type": "boolean"
+                        },
+                        "batteryLevel": {
+                            "title": "Battery Level",
+                            "type": "number"
+                        },
+                        "modificationDate": {
+                            "title": "Modification Date",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "vin",
+                        "registrationNumber"
+                    ]
+                }
+      dataForm: |
+                [
+                    "vin",
+                    "registrationNumber",
+                    {
+                        "type": "flex",
+                        "flex-flow": "row wrap",
+                        "fxLayoutGap": "12px",
+                        "items": [ "isMoving", "isDoorClosed", "isCharging" ]
+                    },
+                    "batteryLevel",
+                    "modificationDate",
+                    {
+                        "type": "submit",
+                        "style": "btn-primary",
+                        "title": "SAVE"
+                    }
+                ]
+      locations:
+          - key: CAR.CURRENT-LOCATION
+            name: { en: "Current location", ru: "Текущее местоположение" }
+            max: 1
+      states:
+          - key: NEW
+            name: { en: "New", ru: "Новый" }
+            icon: fiber_new
+            color: '#FFEB3B'
+            next:
+                - stateKey: AVAILABLE
+                  name: { en: "Make available", ru: "Сделать доступной" }
+                - stateKey: RETIRED
+                  name: { en: "Retire", ru: "Удалить" }
+          - key: AVAILABLE
+            name: { en: "Available", ru: "Доступный" }
+            icon: check_box_outline_blank
+            color: '#CDDC39'
+            next:
+                - stateKey: RESERVED
+                  name: { en: "Reserve", ru: "Зарезервировать" }
+                - stateKey: RETIRED
+                  name: { en: "Retire", ru: "Удалить" }
+                - stateKey: SERVICE-REQUIRED
+                  name: { en: "Service required", ru: "Требуется обслуживание" }
+          - key: RESERVED
+            name: { en: "Reserved", ru: "Зарезервированный" }
+            icon: check_box
+            color: '#8BC34A'
+            next:
+                - stateKey: AVAILABLE
+                  name: { en: "Make available", ru: "Сделать доступной" }
+                - stateKey: IN-USE
+                  name: { en: "Start to use", ru: "Начать использовать" }
+          - key: IN-USE
+            name: { en: "In use", ru: "В использовании" }
+            icon: play_arrow
+            color: '#4CAF50'
+            next:
+                - stateKey: AVAILABLE
+                  name: { en: "Make available", ru: "Сделать доступной" }
+          - key: RETIRED
+            name: { en: "Retired", ru: "Удаленный" }
+            icon: stop
+            color: '#000000'
+          - key: SERVICE-REQUIRED
+            name: { en: "Service required", ru: "Требуется обслуживание" }
+            icon: report
+            color: '#FF9800'
+            next:
+                - stateKey: AVAILABLE
+                  name: { en: "Make available", ru: "Сделать доступной" }
+                - stateKey: IN-SERVICE
+                  name: { en: "In service", ru: "На обслуживание" }
+          - key: IN-SERVICE
+            name: { en: "In service", ru: "На обслуживание" }
+            icon: report
+            color: '#FFC107'
+            next:
+                - stateKey: AVAILABLE
+                  name: { en: "Make available", ru: "Сделать доступной" }
+                - stateKey: RETIRED
+                  name: { en: "Retire", ru: "Удалить" }
+    - key: CAR.NEW
+      name: { en: "Car", ru: "Автомобиль" }
+      isApp: false
+      isAbstract: false
