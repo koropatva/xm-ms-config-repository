@@ -1,12 +1,13 @@
 ---
-logoUrl: 'https://www.drei.at/portal/media/img/dreilogo2k.png'
+logoUrl: '../assets/img/logo-xm-online.png'
 name: XM^online
 theme: teal
+googleApiKey: 
 socialConfiguration:
-    linkedinEnabled: true
-    facebookEnabled: true
-    googleEnabled: true
-    twitterEnabled: true   
+    linkedinEnabled: false
+    facebookEnabled: false
+    googleEnabled: false
+    twitterEnabled: false   
 langs:
     - en
     - ru
