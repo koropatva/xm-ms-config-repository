@@ -3,3 +3,4 @@ security:
     access-token-validity-seconds:
     refresh-token-validity-seconds:
     defaultUserRole: ROLE_VIEW
+    defaultClientSecret: internal
