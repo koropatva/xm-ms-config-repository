@@ -1,6 +1,6 @@
 ---
 security:
-    access-token-validity-seconds:
-    refresh-token-validity-seconds:
+    accessTokenValiditySeconds:
+    refreshTokenValiditySeconds:
     defaultUserRole: ROLE_VIEW
     defaultClientSecret: internal
