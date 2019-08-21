@@ -1,5 +1,44 @@
 ---
 types:
+    - key: TEST
+      name: {en: "test"}
+      isApp: true
+      isAbstract: false
+      functions:
+      - key: TEST_CALL
+        name: { en: "Export balances" , uk: "Експортувати баланси"}
+        actionName: { en: "Export balances" , uk: "Експортувати баланси"}
+        withEntityId: false
+        saveFunctionContext: false
+        onlyData: true
+        inputSpec: |
+          {
+            "type": "object",
+            "properties": {
+                 "startDate": {
+                      "title": "Встановіть дату початку",
+                      "type": "string"
+                 }
+            },
+            "required": ["startDate"]
+          }
+        inputForm: |
+                             {
+                                  "form":
+                                         [
+                                             { "key": "startDate",
+                                               "title": "Встановіть дату початку",
+                                               "type": "date"
+                                             }
+                                         ],
+                                         "options": {
+                                                 "defautWidgetOptions": {
+                                                       "validationMessages": {
+                                                       "required": {"en": "This field is required!"}
+                                                       }
+                                                 }
+                                           }
+                             }
     - key: RESOURCE.XM-TENANT
       name: { en: "Tenant", ru: "Тенант" }
       isApp: true
