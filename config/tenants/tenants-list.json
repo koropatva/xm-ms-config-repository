@@ -1,25 +1,9 @@
 {
-  "entity" : [ {
-    "name" : "xm",
-    "state" : "ACTIVE"
-  } ],
-  "gate" : [ {
+  "communication" : [ {
     "name" : "xm",
     "state" : "ACTIVE"
   } ],
   "uaa" : [ {
-    "name" : "xm",
-    "state" : "ACTIVE"
-  } ],
-  "timeline" : [ {
-    "name" : "xm",
-    "state" : "ACTIVE"
-  } ],
-  "dashboard" : [ {
-    "name" : "xm",
-    "state" : "ACTIVE"
-  } ],
-  "balance" : [ {
     "name" : "xm",
     "state" : "ACTIVE"
   } ]
